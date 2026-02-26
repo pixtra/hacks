@@ -11,21 +11,5 @@
 - [Contributing](#contributing)
 - [License](#license)
 
-# Installation
-
- Just download the repository and use the python scripts [Usage](#usage)
-
-# Usage
-
-### Basic Example
-### Python Keylogger :
-```python
-python keylogger.py start
-```
-### Python Ctrl + Alt + Delete (WinLogon Screen) Detector:
-```python
-from hackify import WLDetector as WLD
-wld=WLD()
-detector=wld.detect()
-# If variable detector returns True, it means user is on the win logon screen, and vice versa
-```
+# Simple script to figure if the user is on the windows logon screen or not.
+# To use, just clone the script and copy the code
