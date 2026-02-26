@@ -11,5 +11,5 @@
 - [Contributing](#contributing)
 - [License](#license)
 
-# Simple script to figure if the user is on the windows logon screen or not.
-# To use, just clone the script and copy the code
+## Simple script to figure if the user is on the windows logon screen or not.
+## To use, just clone the script and copy the code
